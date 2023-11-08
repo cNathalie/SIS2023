@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIS.API", "Libraries\SIS.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SISAPI.DTO", "Libraries\SISAPI.DTO\SISAPI.DTO.csproj", "{10E82CD9-5E0A-4ABA-8030-D129331B1600}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploadTeacherPreferenceConsoleApp", "Apps\UploadTeacherPreferenceConsoleApp\UploadTeacherPreferenceConsoleApp.csproj", "{0C177323-2663-4A94-8F33-FF76E2128314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UploadShedulingDataConsoleApp", "Apps\UploadTeacherPreferenceConsoleApp\UploadShedulingDataConsoleApp.csproj", "{0C177323-2663-4A94-8F33-FF76E2128314}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SISClientDemo", "Apps\SISClientDemo\SISClientDemo.csproj", "{94D2DE64-5E27-4FB4-BCA1-51F81A3F694C}"
 EndProject

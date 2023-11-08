@@ -33,9 +33,11 @@ internal partial class Program
                   .AddHostedService<ConsoleHostedService>() // generic host integrated in console app
                   .AddDbContext<SisDbContext>()
 // -------------------------------------------------------
-                  .AddSingleton<IImporter, TeacherPreferenceImporterService>()
+                  .AddSingleton<IImporter, TeacherPreferenceImporterService>() // N
+                  .AddSingleton<IImporter, CoordinationRoleImporterService>() // N
                   // classes using DbContext should have lifetime Scoped... (esp. ASP.NET Core)
-                  .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>()
+                  .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // N
+                  .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // N
 // -------------------------------------------------------
                   .UseSuperConvertExcelService(); // SuperConvert is integrated through its own service
             })
