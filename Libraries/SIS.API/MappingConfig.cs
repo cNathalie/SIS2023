@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SIS.API.DTO;
 using SIS.Domain;
+using SISAPI.DTO;
 
 namespace SIS.API
 {
@@ -9,7 +10,8 @@ namespace SIS.API
         public MappingConfig()
         {
             CreateMap<Teacher, TeacherDTO>().ReverseMap();
-            CreateMap<TeacherPreference, TeacherPreferenceDTO>().ReverseMap(); // BertEnErnie
+            CreateMap<TeacherPreference, TeacherPreferenceDTO>().ReverseMap(); // BertEnErnie 
+            CreateMap<CoordinationRole, CoordinationRoleDTO>().ReverseMap(); // BertEnErnie 
             CreateMap<Room, RoomDTO>().ReverseMap(); // Da engineering
             CreateMap<RoomType, RoomTypeDTO>().ReverseMap();// Da engineering
             CreateMap<RoomKind, RoomKindDTO>().ReverseMap();// Da engineering

@@ -64,9 +64,16 @@ namespace SIS.API.Controllers
                 return BadRequest("Invalid request data.");
             }
 
+            //Get instance by id
             var teacherPreferenceToUpdate = _repository.TeacherPreferences.Values.FirstOrDefault(tp => tp.TeacherPreferenceId == id);
 
-            //UPDATE
+            //If instance does not exist
+            if (teacherPreferenceToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            //else: UPDATE
             _repository.Update(teacherPreferenceToUpdate, _mapper.Map<TeacherPreference>(dto));
             return Ok("Teacher Preference has succesfully been updated."); ;
         }

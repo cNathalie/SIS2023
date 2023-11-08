@@ -35,7 +35,9 @@ namespace SISApi
                   .AddScoped<ISISRegistrationStateRepository, EFSISRegistrationStateRepository>() // here I could pick the ADO.NET alternative
                   .AddScoped<ISISPersonRepository, EFSISPersonRepository>() // here I could pick the ADO.NET alternative
                   .AddScoped<ISISTeacherRepository, EFSISTeacherRepository>() // here I could pick the ADO.NET alternative
+
                   .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // BertEnErnie
+                  .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // BertEnErnie
 
                   .AddScoped<ISISRoomRepository, EFSISRoomRepository>() // Da engineering
                   .AddScoped<ISISRoomTypeRepository, EFSISRoomTypeRepository>() // Da engineering
