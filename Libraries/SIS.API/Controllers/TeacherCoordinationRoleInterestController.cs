@@ -9,7 +9,7 @@ using System.Net.Mime;
 namespace SIS.API.Controllers
 {
     [ApiController]
-    [Route ("[controller")]
+    [Route ("[controller]")]
 #if ProducesConsumes
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]

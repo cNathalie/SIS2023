@@ -39,7 +39,10 @@ internal partial class Program
                   // classes using DbContext should have lifetime Scoped... (esp. ASP.NET Core)
                   .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // N
                   .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // N
-                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() //N
+                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() // N
+                  .AddScoped<ISISTeacherLocationInterestRepository, EFSISTeacherLocationInterestRepository>()
+
+                  // needed as "support" for other repos
                   .AddScoped<ISISTeacherRepository, EFSISTeacherRepository>() // N
                   .AddScoped<ISISPersonRepository, EFSISPersonRepository>() // N
                   .AddScoped<ISISTeacherTypeRepository, EFSISTeacherTypeRepository>() // N

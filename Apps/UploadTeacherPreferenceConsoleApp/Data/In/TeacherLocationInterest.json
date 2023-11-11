@@ -1,0 +1,34 @@
+[
+  {
+    "AcademicYearStart": "26/09/2023",
+    "AcademicYearStop": "29/06/2024",
+    "TeacherFirstName": "Luc",
+    "TeacherLastName": "Vervoort",
+    "TeacherPreferenceDescription": "Mogelijk",
+    "LocationName": "Aalst"
+  },
+  {
+    "AcademicYearStart": "26/09/2023",
+    "AcademicYearStop": "29/06/2024",
+    "TeacherFirstName": "David",
+    "TeacherLastName": "Breckx",
+    "TeacherPreferenceDescription": "Mogelijk",
+    "LocationName": "Aalst"
+  },
+  {
+    "AcademicYearStart": "26/09/2023",
+    "AcademicYearStop": "29/06/2024",
+    "TeacherFirstName": "Luc",
+    "TeacherLastName": "Vervoort",
+    "TeacherPreferenceDescription": "Mogelijk",
+    "LocationName": "Gent"
+  },
+  {
+    "AcademicYearStart": "26/09/2023",
+    "AcademicYearStop": "29/06/2024",
+    "TeacherFirstName": "David",
+    "TeacherLastName": "Breckx",
+    "TeacherPreferenceDescription": "Mogelijk",
+    "LocationName": "Gent"
+  }
+]

@@ -3,7 +3,6 @@
     public interface ISISTeacherCoordinationRoleInterestRepository
     {
         public Dictionary<string, TeacherCoordinationRoleInterest> TeacherCoordinationRoleInterests { get; }
-
         public Dictionary<string, TeacherCoordinationRoleInterest> RefreshTeacherCoordinationRoleInterests();
         public bool Exists(TeacherCoordinationRoleInterest teacherCoordinationRoleInterest);
         public int Insert(TeacherCoordinationRoleInterest teacherCoordinationRoleInterest);

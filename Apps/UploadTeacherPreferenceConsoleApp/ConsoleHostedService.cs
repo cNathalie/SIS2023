@@ -14,6 +14,7 @@ internal partial class Program
         private readonly IImporter _teacherPreferenceImporterService;
         private readonly IImporter _coordinationRoleImporterService;
         private readonly IImporter _teacherCoordinationRoleInterestImporterService;
+        private readonly IImporter _teacherLocationInterestImporterService;
 
         private readonly ISISTeacherPreferenceRepository _repository;
         private int? _exitCode;
@@ -24,7 +25,8 @@ internal partial class Program
             IHostApplicationLifetime appLifetime,
             IImporter teacherPreferenceImporterService,
             IImporter coordinationRoleImporterService,
-            IImporter teacherCoordinationRoleInterestImporterService)
+            IImporter teacherCoordinationRoleInterestImporterService,
+            IImporter teacherLocationInterestImporterService)
         {
             _logger = logger;
             _configuration = configuration;
@@ -32,6 +34,7 @@ internal partial class Program
             _teacherPreferenceImporterService = teacherPreferenceImporterService;
             _coordinationRoleImporterService = coordinationRoleImporterService;
             _teacherCoordinationRoleInterestImporterService = teacherCoordinationRoleInterestImporterService;
+            _teacherLocationInterestImporterService = teacherLocationInterestImporterService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -46,9 +49,10 @@ internal partial class Program
                     {
                         _logger.LogInformation("Importing...");
 
-                        //_teacherPreferenceImporterService.Import();
-                        //_coordinationRoleImporterService.Import();
-                        _teacherCoordinationRoleInterestImporterService.Import();
+                        _teacherPreferenceImporterService.Import(); // werkt
+                        _coordinationRoleImporterService.Import(); // test
+                        _teacherCoordinationRoleInterestImporterService.Import(); // test
+                        _teacherLocationInterestImporterService.Import(); // test
 
                         _exitCode = 0;
                     }

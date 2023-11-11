@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SIS.Infrastructure.EFRepository.Models;
-using System.Linq.Expressions;
 
 namespace SIS.Infrastructure.EFRepository.Context;
 
