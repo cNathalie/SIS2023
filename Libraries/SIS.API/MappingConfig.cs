@@ -12,6 +12,7 @@ namespace SIS.API
             CreateMap<Teacher, TeacherDTO>().ReverseMap();
             CreateMap<TeacherPreference, TeacherPreferenceDTO>().ReverseMap(); // BertEnErnie 
             CreateMap<CoordinationRole, CoordinationRoleDTO>().ReverseMap(); // BertEnErnie 
+            CreateMap<TeacherCoordinationRoleInterest, TeacherCoordinationRoleInterestDTO>().ReverseMap(); //BertEnErnie
             CreateMap<Room, RoomDTO>().ReverseMap(); // Da engineering
             CreateMap<RoomType, RoomTypeDTO>().ReverseMap();// Da engineering
             CreateMap<RoomKind, RoomKindDTO>().ReverseMap();// Da engineering

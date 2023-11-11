@@ -13,6 +13,7 @@ internal partial class Program
 
         private readonly IImporter _teacherPreferenceImporterService;
         private readonly IImporter _coordinationRoleImporterService;
+        private readonly IImporter _teacherCoordinationRoleInterestImporterService;
 
         private readonly ISISTeacherPreferenceRepository _repository;
         private int? _exitCode;
@@ -22,13 +23,15 @@ internal partial class Program
             IConfiguration configuration,
             IHostApplicationLifetime appLifetime,
             IImporter teacherPreferenceImporterService,
-            IImporter coordinationRoleImporterService)
+            IImporter coordinationRoleImporterService,
+            IImporter teacherCoordinationRoleInterestImporterService)
         {
             _logger = logger;
             _configuration = configuration;
             _appLifetime = appLifetime;
             _teacherPreferenceImporterService = teacherPreferenceImporterService;
             _coordinationRoleImporterService = coordinationRoleImporterService;
+            _teacherCoordinationRoleInterestImporterService = teacherCoordinationRoleInterestImporterService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -43,8 +46,9 @@ internal partial class Program
                     {
                         _logger.LogInformation("Importing...");
 
-                        _teacherPreferenceImporterService.Import();
-                        _coordinationRoleImporterService.Import();
+                        //_teacherPreferenceImporterService.Import();
+                        //_coordinationRoleImporterService.Import();
+                        _teacherCoordinationRoleInterestImporterService.Import();
 
                         _exitCode = 0;
                     }

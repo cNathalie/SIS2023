@@ -12,7 +12,7 @@ namespace SIS.Infrastructure
         private readonly ILogger<EFSISCoordinationRoleRepository> _logger;
         private readonly IConfiguration _configuration;
         private readonly SisDbContext _context;
-        private Dictionary<string, CoordinationRole> _coordinationRoles = new();
+        private static Dictionary<string, CoordinationRole> _coordinationRoles = new();
         public Dictionary<string, CoordinationRole> CoordinationRoles
         {
             get
@@ -62,9 +62,9 @@ namespace SIS.Infrastructure
         public int Insert(CoordinationRole coordinationRole)
         {
             // if the coordintionRole already exists
-            if (Exists(coordinationRole))
+            if (_coordinationRoles.ContainsKey(coordinationRole.Name))
             {
-                throw new Exception("Coordintation Role already exists");
+                return _coordinationRoles[coordinationRole.Name].CoordinationRoleId;
             }
 
             // else try insert
@@ -79,7 +79,7 @@ namespace SIS.Infrastructure
                 var efCoordinationRole = _context.CoordinationRoles.Add(newCoordinationRole).Entity;
                 var count = _context.SaveChanges();
 
-                return efCoordinationRole.CoordinationRoleId;
+                return efCoordinationRole.CoordinationRoleId; //Gives back the newly generated id of the entity
 
             } 
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace SIS.Infrastructure
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
-                throw new Exception("An error occured while trying to update the Coordination Role: " + ex.Message);
+                throw;
             }
         }
 

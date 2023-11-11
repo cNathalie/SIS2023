@@ -29,6 +29,9 @@
     <None Update="Data\In\CoordinationRoles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\In\TeacherCoordinationRoleInterests.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\In\TeacherPreference.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

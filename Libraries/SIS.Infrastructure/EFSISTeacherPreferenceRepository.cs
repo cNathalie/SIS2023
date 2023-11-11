@@ -12,7 +12,7 @@ namespace SIS.Infrastructure
         private readonly IConfiguration _configuration;
         private readonly SisDbContext _context;
 
-        private Dictionary<string, TeacherPreference> _teacherPreferences;
+        private static Dictionary<string, TeacherPreference> _teacherPreferences = new();
         public Dictionary<string, TeacherPreference> TeacherPreferences
         {
             get
@@ -33,7 +33,7 @@ namespace SIS.Infrastructure
 
         public Dictionary<string, TeacherPreference> RefreshTeacherPreferences()
         {
-            _teacherPreferences = new();
+            _teacherPreferences.Clear();
             var dbTeacherPreferences = _context.TeacherPreferences.ToList();
             foreach(var teacherPreference in dbTeacherPreferences)
             {
@@ -63,18 +63,27 @@ namespace SIS.Infrastructure
             {
                 var efRemove = _context.Remove(efTeacherPreference).Entity;
                 var count = _context.SaveChanges();
+
+                RefreshTeacherPreferences();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
+                throw;
             }
     
         }
 
         public bool Exists(TeacherPreference teacherPreference)
         {
-            var efTeacherPreference = _context.TeacherPreferences.Where(tp => tp.Preference == teacherPreference.Preference && tp.TeacherPreferenceId == teacherPreference.TeacherPreferenceId).FirstOrDefault();
+            var efTeacherPreference = GetEFEntity(teacherPreference);
             return efTeacherPreference != null;
+        }
+
+        private SIS.Infrastructure.EFRepository.Models.TeacherPreference GetEFEntity(TeacherPreference teacherPreference)
+        {
+            var efTeacherPreference = _context.TeacherPreferences.Where(tp => tp.Preference == teacherPreference.Preference && tp.TeacherPreferenceId == teacherPreference.TeacherPreferenceId).FirstOrDefault();
+            return efTeacherPreference;
         }
 
         public void Insert(TeacherPreference teacherPreference)

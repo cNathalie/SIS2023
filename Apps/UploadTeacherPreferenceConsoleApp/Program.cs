@@ -35,9 +35,18 @@ internal partial class Program
 // -------------------------------------------------------
                   .AddSingleton<IImporter, TeacherPreferenceImporterService>() // N
                   .AddSingleton<IImporter, CoordinationRoleImporterService>() // N
+                  .AddSingleton<IImporter, TeacherCoordinationRoleInterestImporterService>() // N
                   // classes using DbContext should have lifetime Scoped... (esp. ASP.NET Core)
                   .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // N
                   .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // N
+                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() //N
+                  .AddScoped<ISISTeacherRepository, EFSISTeacherRepository>() // N
+                  .AddScoped<ISISPersonRepository, EFSISPersonRepository>() // N
+                  .AddScoped<ISISTeacherTypeRepository, EFSISTeacherTypeRepository>() // N
+                  .AddScoped<ISISRegistrationStateRepository, EFSISRegistrationStateRepository>() // N
+
+                  //TODO: academicyear repo
+                  
 // -------------------------------------------------------
                   .UseSuperConvertExcelService(); // SuperConvert is integrated through its own service
             })
