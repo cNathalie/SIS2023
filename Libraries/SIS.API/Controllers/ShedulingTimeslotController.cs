@@ -16,13 +16,13 @@ namespace SIS.API.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
 #endif
-    public class CoordinationRoleController : ControllerBase
+    public class ShedulingTimeslotController : ControllerBase
     {
-        private readonly ILogger<CoordinationRoleController> _logger;
-        private readonly ISISCoordinationRoleRepository _repository;
+        private readonly ILogger<ShedulingTimeslotController> _logger;
+        private readonly ISISShedulingTimeslotRepository _repository;
         private readonly IMapper _mapper;
 
-        public CoordinationRoleController(ILogger<CoordinationRoleController> logger, ISISCoordinationRoleRepository repository, IMapper mapper)
+        public ShedulingTimeslotController(ILogger<ShedulingTimeslotController> logger, ISISShedulingTimeslotRepository repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
@@ -31,16 +31,15 @@ namespace SIS.API.Controllers
 
         [HttpGet]
 #if ProducesConsumes
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CoordinationRoleDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ShedulingTimeslotDTO>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public ActionResult<IEnumerable<CoordinationRoleDTO>> Get()
+        public ActionResult<IEnumerable<ShedulingTimeslotDTO>> Get()
         {
-            return Ok(_mapper.Map<List<CoordinationRoleDTO>>(_repository.CoordinationRoles.Values.ToList()));
+            return Ok(_mapper.Map<List<ShedulingTimeslotDTO>>(_repository.ShedulingTimeslots.Values.ToList()));
         }
 
-
-        [HttpDelete(Name = "DeleteCoordinationRole")]
+        [HttpDelete]
 #if ProducesConsumes
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,13 +48,13 @@ namespace SIS.API.Controllers
 #endif
         public ActionResult Delete([Required] int id)
         {
-            var coordinationRoleToDelete = _repository.CoordinationRoles.Values.FirstOrDefault(cr => cr.CoordinationRoleId == id);
-            if (coordinationRoleToDelete == null)
+            var timeslotToDelete = _repository.ShedulingTimeslots.Values.FirstOrDefault(ts => ts.SchedulingTimeslotId == id);
+            if (timeslotToDelete == null)
             {
                 return NotFound();
             }
 
-            _repository.Delete(coordinationRoleToDelete);
+            _repository.Delete(timeslotToDelete);
             return NoContent();
         }
 
@@ -67,7 +66,7 @@ namespace SIS.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public IActionResult Put([Required] int id, [FromBody][Required] CoordinationRoleDTO dto)
+        public IActionResult Put([Required] int id, [FromBody][Required] ShedulingTimeslotDTO dto)
         {
             //If DTO comes back with default values or is null
             if (!IsValid(dto))
@@ -76,20 +75,19 @@ namespace SIS.API.Controllers
             }
 
             //Get instance by id
-            var coordinationRoleToUpdate = _repository.CoordinationRoles.Values.FirstOrDefault(cr => cr.CoordinationRoleId == id);
+            var timeslotToUpdate = _repository.ShedulingTimeslots.Values.FirstOrDefault(ts => ts.SchedulingTimeslotId == id);
 
             //If instance does not exist
-            if (coordinationRoleToUpdate == null)
+            if (timeslotToUpdate == null)
             {
                 return NotFound();
             }
 
             //else:  UPDATE
-            _repository.Update(coordinationRoleToUpdate, _mapper.Map<CoordinationRole>(dto));
-            return Ok($"Coordination Role with id:{id} has succesfully been updated.");
+            _repository.Update(timeslotToUpdate, _mapper.Map<ShedulingTimeslot>(dto));
+            return Ok($"Timeslot with id:{id} has succesfully been updated.");
 
         }
-
 
         [HttpPost]
 #if ProducesConsumes
@@ -97,7 +95,7 @@ namespace SIS.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public IActionResult Post([FromBody][Required] CoordinationRoleDTO dto)
+        public IActionResult Post([FromBody][Required] ShedulingTimeslotDTO dto)
         {
             //If DTO comes back with default values or is null
             if (!IsValid(dto))
@@ -105,24 +103,26 @@ namespace SIS.API.Controllers
                 return BadRequest("Invalid request data.");
             }
 
-            var coordinationRoleToCreate = _mapper.Map<CoordinationRole>(dto);
+            var timeslotToCreate = _mapper.Map<ShedulingTimeslot>(dto);
 
             //else INSERT
-            var efCoordinationRoleId = _repository.Insert(_mapper.Map<CoordinationRole>(dto));
-            dto.CoordinationRoleId = efCoordinationRoleId;
-            return CreatedAtAction(nameof(Get), new { id = efCoordinationRoleId }, dto);
+            var efTimeslotId = _repository.Insert(timeslotToCreate);
+            dto.SchedulingTimeslotId = efTimeslotId;
+            return CreatedAtAction(nameof(Get), new { id = efTimeslotId }, dto);
         }
 
-
-        private bool IsValid(CoordinationRoleDTO dto)
+        private bool IsValid(ShedulingTimeslotDTO dto)
         {
-            if (dto == null ||
-                (dto.Name == "string"
-                && dto.AssignmentPercentage == 0
-                && dto.CoordinationRoleId == 0)) 
+            if (dto == null 
+                || dto.Name == "string"
+                || dto.Description == "string"
+                || dto.StartTime == default
+                || dto.StopTime == default
+                )
             { return false; }
 
             return true;
         }
+
     }
 }

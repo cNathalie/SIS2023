@@ -99,6 +99,7 @@ namespace SIS.Infrastructure
             {
                 var newCoordinationRole = new CoordinationRole
                 {
+                    CoordinationRoleId = coordinationRole.CoordinationRoleId,
                     Name = coordinationRole.Name,
                     AssignmentPercentage = coordinationRole.AssignmentPercentage,
                 };

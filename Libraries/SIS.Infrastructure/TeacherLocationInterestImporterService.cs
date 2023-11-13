@@ -22,7 +22,12 @@ namespace SIS.Infrastructure
         public void Import()
         {
             string json = File.ReadAllText(Path.Combine(_configuration["JsonDataPath"], "TeacherLocationInterests.json"));
-            var locationInterest = JsonConvert.DeserializeObject<List<TeacherLocationInterest>>(json);
+            var locationInterest = JsonConvert.DeserializeObject<List<TeacherLocationInterest>>(json, new JsonSerializerSettings()
+            {
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+            });
+
             if (locationInterest != null)
             {
                 foreach (var role in locationInterest)

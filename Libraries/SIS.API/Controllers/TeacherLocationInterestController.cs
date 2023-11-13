@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SIS.Domain;
 using SIS.Domain.Interfaces;
 using SISAPI.DTO;
 using System.ComponentModel.DataAnnotations;
@@ -76,21 +77,42 @@ namespace SIS.API.Controllers
             }
 
             //Get instance by id
-            var coordinationRoleToUpdate = _repository.CoordinationRoles.Values.FirstOrDefault(cr => cr.CoordinationRoleId == id);
+            var locationInterestToUpdate = _repository.TeacherLocationInterests.Values.FirstOrDefault(li => li.TeacherLocationInterestId == id);
 
             //If instance does not exist
-            if (coordinationRoleToUpdate == null)
+            if (locationInterestToUpdate == null)
             {
                 return NotFound();
             }
 
             //else:  UPDATE
-            _repository.Update(coordinationRoleToUpdate, _mapper.Map<CoordinationRole>(dto));
-            return Ok($"Coordination Role with id:{id} has succesfully been updated.");
+            _repository.Update(locationInterestToUpdate, _mapper.Map<TeacherLocationInterest>(dto));
+            return Ok($"Teacher Location Interest with id:{id} has succesfully been updated.");
 
         }
 
 
+        [HttpPost]
+#if ProducesConsumes
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#endif
+        public IActionResult Post([FromBody][Required] TeacherLocationInterestDTO dto)
+        {
+            //If DTO comes back with default values or is null
+            if (!IsValid(dto))
+            {
+                return BadRequest("Invalid request data.");
+            }
+
+            var locationInterestToCreate = _mapper.Map<TeacherLocationInterest>(dto);
+
+            //else INSERT
+            var efLocationInterestId = _repository.Insert(locationInterestToCreate);
+            dto.TeacherLocationInterestId = efLocationInterestId;
+            return CreatedAtAction(nameof(Get), new { id = efLocationInterestId }, dto);
+        }
 
         private bool IsValid(TeacherLocationInterestDTO dto)
         {

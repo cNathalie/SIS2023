@@ -16,13 +16,13 @@ namespace SIS.API.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
 #endif
-    public class CoordinationRoleController : ControllerBase
+    public class PeriodController : ControllerBase
     {
-        private readonly ILogger<CoordinationRoleController> _logger;
-        private readonly ISISCoordinationRoleRepository _repository;
+        private readonly ILogger<PeriodController> _logger;
+        private readonly ISISPeriodRepository _repository;
         private readonly IMapper _mapper;
 
-        public CoordinationRoleController(ILogger<CoordinationRoleController> logger, ISISCoordinationRoleRepository repository, IMapper mapper)
+        public PeriodController(ILogger<PeriodController> logger, ISISPeriodRepository repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
@@ -31,16 +31,16 @@ namespace SIS.API.Controllers
 
         [HttpGet]
 #if ProducesConsumes
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CoordinationRoleDTO>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PeriodDTO>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public ActionResult<IEnumerable<CoordinationRoleDTO>> Get()
+        public ActionResult<IEnumerable<PeriodDTO>> Get()
         {
-            return Ok(_mapper.Map<List<CoordinationRoleDTO>>(_repository.CoordinationRoles.Values.ToList()));
+            return Ok(_mapper.Map<List<PeriodDTO>>(_repository.Periods.Values.ToList()));
         }
 
 
-        [HttpDelete(Name = "DeleteCoordinationRole")]
+        [HttpDelete]
 #if ProducesConsumes
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,16 +49,15 @@ namespace SIS.API.Controllers
 #endif
         public ActionResult Delete([Required] int id)
         {
-            var coordinationRoleToDelete = _repository.CoordinationRoles.Values.FirstOrDefault(cr => cr.CoordinationRoleId == id);
-            if (coordinationRoleToDelete == null)
+            var periodToDelete = _repository.Periods.Values.FirstOrDefault(p => p.PeriodId == id);
+            if (periodToDelete == null)
             {
                 return NotFound();
             }
 
-            _repository.Delete(coordinationRoleToDelete);
+            _repository.Delete(periodToDelete);
             return NoContent();
         }
-
 
         [HttpPut]
 #if ProducesConsumes
@@ -67,7 +66,7 @@ namespace SIS.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public IActionResult Put([Required] int id, [FromBody][Required] CoordinationRoleDTO dto)
+        public IActionResult Put([Required] int id, [FromBody][Required] PeriodDTO dto)
         {
             //If DTO comes back with default values or is null
             if (!IsValid(dto))
@@ -76,7 +75,7 @@ namespace SIS.API.Controllers
             }
 
             //Get instance by id
-            var coordinationRoleToUpdate = _repository.CoordinationRoles.Values.FirstOrDefault(cr => cr.CoordinationRoleId == id);
+            var coordinationRoleToUpdate = _repository.Periods.Values.FirstOrDefault(p => p.PeriodId == id);
 
             //If instance does not exist
             if (coordinationRoleToUpdate == null)
@@ -85,11 +84,10 @@ namespace SIS.API.Controllers
             }
 
             //else:  UPDATE
-            _repository.Update(coordinationRoleToUpdate, _mapper.Map<CoordinationRole>(dto));
-            return Ok($"Coordination Role with id:{id} has succesfully been updated.");
+            _repository.Update(coordinationRoleToUpdate, _mapper.Map<Period>(dto));
+            return Ok($"Period with id:{id} has succesfully been updated.");
 
         }
-
 
         [HttpPost]
 #if ProducesConsumes
@@ -97,7 +95,7 @@ namespace SIS.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #endif
-        public IActionResult Post([FromBody][Required] CoordinationRoleDTO dto)
+        public IActionResult Post([FromBody][Required] PeriodDTO dto)
         {
             //If DTO comes back with default values or is null
             if (!IsValid(dto))
@@ -105,24 +103,22 @@ namespace SIS.API.Controllers
                 return BadRequest("Invalid request data.");
             }
 
-            var coordinationRoleToCreate = _mapper.Map<CoordinationRole>(dto);
+            var periodToCreate = _mapper.Map<Period>(dto);
 
             //else INSERT
-            var efCoordinationRoleId = _repository.Insert(_mapper.Map<CoordinationRole>(dto));
-            dto.CoordinationRoleId = efCoordinationRoleId;
-            return CreatedAtAction(nameof(Get), new { id = efCoordinationRoleId }, dto);
+            var efPeriodId = _repository.Insert(periodToCreate);
+            dto.PeriodId = efPeriodId;
+            return CreatedAtAction(nameof(Get), new { id = efPeriodId }, dto);
         }
 
-
-        private bool IsValid(CoordinationRoleDTO dto)
+        private bool IsValid(PeriodDTO dto)
         {
             if (dto == null ||
-                (dto.Name == "string"
-                && dto.AssignmentPercentage == 0
-                && dto.CoordinationRoleId == 0)) 
+                (dto.Name == "string"))
             { return false; }
 
             return true;
         }
+
     }
 }

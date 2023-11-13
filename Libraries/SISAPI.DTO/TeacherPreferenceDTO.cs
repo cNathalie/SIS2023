@@ -5,8 +5,7 @@ namespace SIS.API.DTO
     public class TeacherPreferenceDTO
     {
         public int TeacherPreferenceId { get; set; }
-        [Range(1,10)]
-        public int Preference { get; set; }
-        public string Description { get; set; }
+        [Required] [Range(1,10)] public int Preference { get; set; }
+        [Required] public string Description { get; set; }
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SISAPI.DTO
 {
     public class CoordinationRoleDTO
     {
         public int CoordinationRoleId { get; set; }
-        public string Name { get; set; }
-        public int AssignmentPercentage { get; set; }
+        [Required] public string Name { get; set; }
+        [Required] public int AssignmentPercentage { get; set; }
     }
 }

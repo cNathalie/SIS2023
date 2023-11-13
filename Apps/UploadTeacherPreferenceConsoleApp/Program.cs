@@ -41,6 +41,7 @@ internal partial class Program
                   .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // N
                   .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() // N
                   .AddScoped<ISISTeacherLocationInterestRepository, EFSISTeacherLocationInterestRepository>()
+                  .AddScoped<ISISPeriodRepository, EFSISPeriodRepository>()
 
                   // needed as "support" for other repos
                   .AddScoped<ISISTeacherRepository, EFSISTeacherRepository>() // N

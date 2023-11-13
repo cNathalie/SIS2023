@@ -1,31 +1,31 @@
 [
   {
-    "AcademicYearStart": "26/09/2023",
-    "AcademicYearStop": "29/06/2024",
+    "AcademicYearStart": "2023-09-26T00:00:00",
+    "AcademicYearStop": "2024-06-29T00:00:00",
     "TeacherFirstName": "Luc",
     "TeacherLastName": "Vervoort",
     "TeacherPreferenceDescription": "Mogelijk",
     "LocationName": "Aalst"
   },
   {
-    "AcademicYearStart": "26/09/2023",
-    "AcademicYearStop": "29/06/2024",
+    "AcademicYearStart": "2023-09-26T00:00:00",
+    "AcademicYearStop": "2024-06-29T00:00:00",
     "TeacherFirstName": "David",
     "TeacherLastName": "Breckx",
     "TeacherPreferenceDescription": "Mogelijk",
     "LocationName": "Aalst"
   },
   {
-    "AcademicYearStart": "26/09/2023",
-    "AcademicYearStop": "29/06/2024",
+    "AcademicYearStart": "2023-09-26T00:00:00",
+    "AcademicYearStop": "2024-06-29T00:00:00",
     "TeacherFirstName": "Luc",
     "TeacherLastName": "Vervoort",
     "TeacherPreferenceDescription": "Mogelijk",
     "LocationName": "Gent"
   },
   {
-    "AcademicYearStart": "26/09/2023",
-    "AcademicYearStop": "29/06/2024",
+    "AcademicYearStart": "2023-09-26T00:00:00",
+    "AcademicYearStop": "2024-06-29T00:00:00",
     "TeacherFirstName": "David",
     "TeacherLastName": "Breckx",
     "TeacherPreferenceDescription": "Mogelijk",

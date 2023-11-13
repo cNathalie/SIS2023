@@ -9,6 +9,7 @@ using SIS.Infrastructure;
 using SIS.Infrastructure.EFRepository.Context;
 using SISApi.Extensions;
 
+
 namespace SISApi
 {
     public class Program
@@ -38,6 +39,10 @@ namespace SISApi
 
                   .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // BertEnErnie
                   .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // BertEnErnie
+                  .AddScoped<ISISPeriodRepository, EFSISPeriodRepository>() // BertEnErnie
+                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() // BertEnErnie
+                  .AddScoped<ISISTeacherLocationInterestRepository, EFSISTeacherLocationInterestRepository>() // BertEnErnie
+                  .AddScoped<ISISShedulingTimeslotRepository, EFSISShedulingTimeslotRepository>() //BertEnErnie
 
                   .AddScoped<ISISRoomRepository, EFSISRoomRepository>() // Da engineering
                   .AddScoped<ISISRoomTypeRepository, EFSISRoomTypeRepository>() // Da engineering
@@ -49,6 +54,9 @@ namespace SISApi
             builder.Services.AddAutoMapper(typeof(MappingConfig));
 
             builder.Services.AddControllers();
+
+            // Added so swagger handles TimeOnly and DateOnly (Nathalie)
+            builder.Services.AddDateOnlyTimeOnlyStringConverters();
 
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddFluentValidationClientsideAdapters();
