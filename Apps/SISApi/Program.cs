@@ -9,6 +9,16 @@ using SIS.Infrastructure;
 using SIS.Infrastructure.EFRepository.Context;
 using SISApi.Extensions;
 
+//--Nathalie:
+//------------
+//-OK- 1 CoordinationRole 
+//-OK- 2 TeacherPreference 
+//-OK- 3 TeacherCoordinationRoleInterest 
+//-k- 4 TeacherCourseInterest 
+//-K- 5 TeacherInterest 
+//-OK- 6 TeacherLocationInterest 
+//-OK- 7 Period 
+//-OK- 8 SchedulingTimeslot 
 
 namespace SISApi
 {
@@ -37,12 +47,14 @@ namespace SISApi
                   .AddScoped<ISISPersonRepository, EFSISPersonRepository>() // here I could pick the ADO.NET alternative
                   .AddScoped<ISISTeacherRepository, EFSISTeacherRepository>() // here I could pick the ADO.NET alternative
 
-                  .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // BertEnErnie
-                  .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // BertEnErnie
-                  .AddScoped<ISISPeriodRepository, EFSISPeriodRepository>() // BertEnErnie
-                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() // BertEnErnie
-                  .AddScoped<ISISTeacherLocationInterestRepository, EFSISTeacherLocationInterestRepository>() // BertEnErnie
-                  .AddScoped<ISISShedulingTimeslotRepository, EFSISShedulingTimeslotRepository>() //BertEnErnie
+                  .AddScoped<ISISTeacherPreferenceRepository, EFSISTeacherPreferenceRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISCoordinationRoleRepository, EFSISCoordinationRoleRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISPeriodRepository, EFSISPeriodRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISTeacherCoordinationRoleInterestRepository, EFSISTeacherCoordinationRoleInterestRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISTeacherLocationInterestRepository, EFSISTeacherLocationInterestRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISShedulingTimeslotRepository, EFSISShedulingTimeslotRepository>() //BertEnErnie Nathalie
+                  .AddScoped<ISISTeacherInterestRepository, EFSISTeacherInterestRepository>() // BertEnErnie Nathalie
+                  .AddScoped<ISISTeacherCourseInterestRepository, EFSISTeacherCourseInterestRepository>() // BertEnErnie Nathalie
 
                   .AddScoped<ISISRoomRepository, EFSISRoomRepository>() // Da engineering
                   .AddScoped<ISISRoomTypeRepository, EFSISRoomTypeRepository>() // Da engineering

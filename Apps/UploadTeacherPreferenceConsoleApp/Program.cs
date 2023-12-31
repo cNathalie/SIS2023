@@ -7,6 +7,16 @@ using SIS.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using SIS.Infrastructure.EFRepository.Context;
+//--Nathalie:
+//------------
+//-OK- 1 CoordinationRole 
+//-OK- 2 TeacherPreference 
+//-OK- 3 TeacherCoordinationRoleInterest 
+//-- 4 TeacherCourseInterest 
+//-K- 5 TeacherInterest 
+//-OK- 6 TeacherLocationInterest 
+//-OK- 7 Period 
+//-OK- 8 SchedulingTimeslot 
 
 internal partial class Program
 {
